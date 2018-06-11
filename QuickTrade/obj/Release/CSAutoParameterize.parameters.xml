@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="QuickTradeModelContainer-Web.config Connection String" description="QuickTradeModelContainer Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.QuickTradeModel.csdl|res://*/Models.QuickTradeModel.ssdl|res://*/Models.QuickTradeModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=quicktradepolsl.database.windows.net;initial catalog=QuickTradeDb;user id=Cieslin;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="E:\\Projekt-PUM\\Development\\QuickTrade\\QuickTrade\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='QuickTradeModelContainer']/@connectionString" />
+  </parameter>
+</parameters>

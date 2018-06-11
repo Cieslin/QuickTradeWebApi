@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QuickTradeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="QuickTradeModelStoreContainer">
+    <EntitySet Name="AccountSet" EntityType="QuickTradeModel.Store.AccountSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AdvertSet" EntityType="QuickTradeModel.Store.AdvertSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ImagesSet" EntityType="QuickTradeModel.Store.ImagesSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="AdvertImages" Association="QuickTradeModel.Store.AdvertImages">
+      <End Role="Advert" EntitySet="AdvertSet" />
+      <End Role="Images" EntitySet="ImagesSet" />
+    </AssociationSet>
+    <AssociationSet Name="AccountAdvert" Association="QuickTradeModel.Store.AccountAdvert">
+      <End Role="Account" EntitySet="AccountSet" />
+      <End Role="Advert" EntitySet="AdvertSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AccountSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AdvertSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EMail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ImagesSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" Nullable="false" />
+    <Property Name="AdvertId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AdvertImages">
+    <End Role="Advert" Type="QuickTradeModel.Store.AdvertSet" Multiplicity="1" />
+    <End Role="Images" Type="QuickTradeModel.Store.ImagesSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advert">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="AdvertId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountAdvert">
+    <End Role="Account" Type="QuickTradeModel.Store.AccountSet" Multiplicity="1" />
+    <End Role="Advert" Type="QuickTradeModel.Store.AdvertSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Advert">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

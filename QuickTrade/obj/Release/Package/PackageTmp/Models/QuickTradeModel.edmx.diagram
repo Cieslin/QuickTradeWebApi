@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="abc644f71149456cb8d374daf9b16c64" Name="Diagram1" ZoomLevel="108" >
+        <EntityTypeShape EntityType="QuickTradeModel.Account" Width="1.5" PointX="1.875" PointY="2.5" />
+        <EntityTypeShape EntityType="QuickTradeModel.Advert" Width="1.5" PointX="4.5" PointY="2.5" />
+        <EntityTypeShape EntityType="QuickTradeModel.Images" Width="1.5" PointX="7" PointY="2.5" />
+        <AssociationConnector Association="QuickTradeModel.AdvertImages" />
+        <AssociationConnector Association="QuickTradeModel.AccountAdvert" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

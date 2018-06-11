@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="QuickTradeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="QuickTradeModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccountSet" EntityType="QuickTradeModel.Account" />
+    <EntitySet Name="AdvertSet" EntityType="QuickTradeModel.Advert" />
+    <EntitySet Name="ImagesSet" EntityType="QuickTradeModel.Images" />
+    <AssociationSet Name="AdvertImages" Association="QuickTradeModel.AdvertImages">
+      <End Role="Advert" EntitySet="AdvertSet" />
+      <End Role="Images" EntitySet="ImagesSet" />
+    </AssociationSet>
+    <AssociationSet Name="AccountAdvert" Association="QuickTradeModel.AccountAdvert">
+      <End Role="Account" EntitySet="AccountSet" />
+      <End Role="Advert" EntitySet="AdvertSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" />
+    <NavigationProperty Name="Advert" Relationship="QuickTradeModel.AccountAdvert" FromRole="Account" ToRole="Advert" />
+  </EntityType>
+  <EntityType Name="Advert">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" />
+    <Property Name="Body" Type="String" Nullable="false" />
+    <Property Name="DateAdded" Type="DateTime" Nullable="false" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" />
+    <Property Name="EMail" Type="String" Nullable="false" />
+    <NavigationProperty Name="Images" Relationship="QuickTradeModel.AdvertImages" FromRole="Advert" ToRole="Images" />
+    <NavigationProperty Name="Account" Relationship="QuickTradeModel.AccountAdvert" FromRole="Advert" ToRole="Account" />
+    <Property Name="AccountId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Image" Type="Binary" Nullable="false" />
+    <NavigationProperty Name="Advert" Relationship="QuickTradeModel.AdvertImages" FromRole="Images" ToRole="Advert" />
+    <Property Name="AdvertId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="AdvertImages">
+    <End Type="QuickTradeModel.Advert" Role="Advert" Multiplicity="1" />
+    <End Type="QuickTradeModel.Images" Role="Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advert">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="AdvertId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AccountAdvert">
+    <End Type="QuickTradeModel.Account" Role="Account" Multiplicity="1" />
+    <End Type="QuickTradeModel.Advert" Role="Advert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Advert">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
